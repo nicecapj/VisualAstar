@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "AStarWin32.h"
 #include "Astar.h"
+#include "Jps.h"
 
 #define MAX_LOADSTRING 100
 
@@ -158,6 +159,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: Add any drawing code that uses hdc here...
 
+			Jps jps;
+			jps.JpsStart(Vector2DI(0, 0), Vector2DI(4, 4));
+
 			AStar astar;
 			astar.AStarStart(Vector2DI(0, 0), Vector2DI(4, 4));
 
@@ -202,7 +206,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				strID += strF;
 				
 				
-				TextOut(hdc, x*RECT_SIZE, y*RECT_SIZE, strID.c_str(), strID.size());
+				TextOut(hdc, x*RECT_SIZE, y*RECT_SIZE, strID.c_str(), static_cast<int>(strID.size()));
 				//TextOut(hdc, x*RECT_SIZE+20, y*RECT_SIZE, strG.c_str(), strG.size());
 				//TextOut(hdc, x*RECT_SIZE+40, y*RECT_SIZE, strH.c_str(), strH.size());
 				//TextOut(hdc, x*RECT_SIZE+60, y*RECT_SIZE, strF.c_str(), strF.size());
@@ -219,7 +223,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				++index;
 				_itoa_s(index, buff, 10);
 				wstring str = s2ws(buff);
-				TextOut(hdc, x*RECT_SIZE+40, y * RECT_SIZE+40, str.c_str(), str.size());
+				TextOut(hdc, x*RECT_SIZE+40, y * RECT_SIZE+40, str.c_str(), static_cast<int>(str.size()));
 			}
 
 			int count = 0;
@@ -257,9 +261,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 
 				int col = count++ * 80;
-				TextOut(hdc, 800, 10 + col, id.c_str(), id.size());
-				TextOut(hdc, 800, 30 + col, open.c_str(), open.size());
-				TextOut(hdc, 800, 50 + col, close.c_str(), close.size());
+				TextOut(hdc, 800, 10 + col, id.c_str(), static_cast<int>(id.size()));
+				TextOut(hdc, 800, 30 + col, open.c_str(), static_cast<int>(open.size()));
+				TextOut(hdc, 800, 50 + col, close.c_str(), static_cast<int>(close.size()));
 				//TextOut(hdc, 800, 110 + col, path.c_str(), path.size());
 			}
 

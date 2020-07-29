@@ -5,19 +5,9 @@
 
 using namespace std;
 int AStar::AStarStart(Vector2DI start, Vector2DI end)
-{
-	openlist.clear();
-	closelist.clear();
-	path.clear();
-	start_ = start;
-	end_ = end;
-	//auto startNode = std::make_shared<Node>(start_);
-	//shared_ptr<Node> startNode(new Node(start_));
-	//printf("%x\n", &startNode);
-	//printf("%x\n", startNode.get());
-	//openlist.emplace(map<int, Node*>::value_type(0, startNode.get()));
-
-	MakeRoute();
+{	
+	Initialze(start, end);	
+	
 	auto startNode = GetNode(start.X, start.Y);
 	assert(startNode);
 	if (startNode)
@@ -25,12 +15,32 @@ int AStar::AStarStart(Vector2DI start, Vector2DI end)
 		openlist.push_front(startNode);
 		//path.push_back(startNode);
 	}
+
 	FindPath();
 	return 0;
 }
+
+void AStar::Initialze(Vector2DI start, Vector2DI end)
+{
+	openlist.clear();
+	closelist.clear();
+	path.clear();
+	start_ = start;
+	end_ = end;
+
+
+	//auto startNode = std::make_shared<Node>(start_);
+	//shared_ptr<Node> startNode(new Node(start_));
+	//printf("%x\n", &startNode);
+	//printf("%x\n", startNode.get());
+	//openlist.emplace(map<int, Node*>::value_type(0, startNode.get()));
+
+	MakeRoute();
+}
+
 Node* AStar::MakeChildNode(int x, int y, Node* currentNode)
 {
-	if (auto node = GetNode(x, y))
+	if (const auto& node = GetNode(x, y))
 	{
 		node->Parent = currentNode;
 
@@ -122,9 +132,11 @@ void AStar::SortOpenlist()
 	//    return false;
 	//});
 }
+
+
 void AStar::FindPath()
 {
-	if (openlist.size() <= 0)
+	if (openlist.size() == 0)
 	{
 		cout << "Can`t find path" << endl;
 		return;
@@ -139,7 +151,7 @@ void AStar::FindPath()
 		debugInfo.Current = currentNode;
 
 		path.push_back(currentNode);
-		for (auto pathNode : path)
+		for (auto& pathNode : path)
 		{
 			debugInfo.path.push_back(pathNode);
 		}
