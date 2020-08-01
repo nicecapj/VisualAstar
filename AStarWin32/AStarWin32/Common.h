@@ -16,7 +16,7 @@ class WorldManager
 public:
 	static const int MAP_MAX_X = 5;
 	static const int MAP_MAX_Y = 5;
-	int mapData[MAP_MAX_Y][MAP_MAX_X] =
+	const int mapData[MAP_MAX_Y][MAP_MAX_X] =
 	{
 		{ 0, 0, 0, 0, 0 },
 		{ 0, 0, 1, 0, 0 },

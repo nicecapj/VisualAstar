@@ -71,9 +71,9 @@ void AStar::MakeRoute()
 			node->Position = std::move(Vector2DI(x, y));
 			int h = (end_.Y - node->Position.Y) + (end_.X - node->Position.X);
 			int g = (node->Position.Y - start_.Y) + (node->Position.X - start_.X);
-			node->G = g;
 			node->H = h;
-			node->F = g + h;
+			node->G = g;
+			node->F = g + h;			
 			nodeList_.emplace(make_pair(node->Index, node));
 		}
 	}
@@ -229,18 +229,7 @@ void AStar::PrintPath()
 {
 	for (auto pathNode : path)
 	{
-		WorldManager::Get()->mapData[pathNode->Position.Y][pathNode->Position.X] = 2;
-		//cout << pathNode->Position.X << ":" << pathNode->Position.Y << endl;
-		for (int y = 0; y < WorldManager::MAP_MAX_Y; ++y)
-		{
-			for (int x = 0; x < WorldManager::MAP_MAX_X; ++x)
-			{
-				cout << WorldManager::Get()->mapData[y][x];
-			}
-			cout << endl;
-		}
-		//std::this_thread::sleep_for(std::chrono::seconds(1));
-		cout << endl;
+		cout << pathNode->Position.Y << "," << pathNode->Position.X << endl;
 	}
 	cout << endl;
 }

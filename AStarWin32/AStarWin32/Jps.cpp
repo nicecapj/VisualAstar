@@ -517,14 +517,23 @@ void Jps::FindPath()
 	{
 		auto currentNode = openlist.front();
 		if (currentNode)
-		{
+		{			
 			if (currentNode->Position == end_)
 			{
 				cout << "Find Path" << endl;
+				
+				path.push_back(currentNode);
+				Node* parent = currentNode->Parent;
+				while (parent != nullptr)
+				{
+					path.push_back(parent);
+					parent = parent->Parent;
+				}
+
 				PrintPath();
 				return;
 			}
-
+						
 			openlist.pop_front();
 
 			//»óÇÏÁÂ¿ì			
