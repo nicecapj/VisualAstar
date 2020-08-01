@@ -67,6 +67,7 @@ void AStar::MakeRoute()
 			auto node = std::make_shared<Node>();
 			node->Index = (WorldManager::MAP_MAX_Y * y) + x;
 			node->ObjectType = (WorldManager::EObjectType)WorldManager::Get()->mapData[y][x];
+			node->State = node->ObjectType;//jps에서 사용함.
 			node->Position = std::move(Vector2DI(x, y));
 			int h = (end_.Y - node->Position.Y) + (end_.X - node->Position.X);
 			int g = (node->Position.Y - start_.Y) + (node->Position.X - start_.X);

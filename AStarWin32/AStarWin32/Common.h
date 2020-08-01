@@ -28,7 +28,7 @@ public:
 	{
 		Road = 0,
 		Wall = 1,
-		ForceNeighbor = 2,
+		Closed = 2,
 
 	};
 
